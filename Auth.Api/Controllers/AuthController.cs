@@ -30,10 +30,10 @@ namespace Auth.Api.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
-                // var result = await _signinManager.CheckPasswordSignInAsync(user, authViewModel.Password, false);
-                if (user.Succeeded)
-                {
+                //var user = await HttpContext.AuthenticateAsync("MainCookie");
+                //// var result = await _signinManager.CheckPasswordSignInAsync(user, authViewModel.Password, false);
+                //if (user.Succeeded)
+                //{
                     // get the informaton need from the cookie from the SSO server and build out what we need
                     var claims = new[]
                     {
@@ -56,7 +56,7 @@ namespace Auth.Api.Controllers
                     };
 
                     return Created("", results);
-                }
+                // }
             }
             return BadRequest();
         }

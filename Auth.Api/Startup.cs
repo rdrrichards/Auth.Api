@@ -49,12 +49,12 @@ namespace Auth.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAuthentication(options => {
-                options.DefaultScheme = "MainCookie";
+            services.AddAuthentication().AddCookie(options => {
+                options.Cookie.Name = "MainCookie";
             });
-            services.AddAuthentication(options => {
-                options.DefaultScheme = "ExternalCookie";
-            });
+            //services.AddAuthentication().AddCookie(options => {
+            //    options.Cookie.Name = "ExternalCookie";
+            //});
             services.AddAuthentication().AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters()
