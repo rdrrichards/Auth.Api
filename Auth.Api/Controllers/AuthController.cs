@@ -7,8 +7,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Auth.Api.Controllers
 {
@@ -30,10 +28,10 @@ namespace Auth.Api.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = await HttpContext.AuthenticateAsync("MainCookie");
-                //// var result = await _signinManager.CheckPasswordSignInAsync(user, authViewModel.Password, false);
-                //if (user.Succeeded)
-                //{
+                var user = await HttpContext.AuthenticateAsync("MainCookie");
+                // var result = await _signinManager.CheckPasswordSignInAsync(user, authViewModel.Password, false);
+                if (user.Succeeded)
+                {
                     // get the informaton need from the cookie from the SSO server and build out what we need
                     var claims = new[]
                     {
@@ -56,7 +54,7 @@ namespace Auth.Api.Controllers
                     };
 
                     return Created("", results);
-                // }
+                }
             }
             return BadRequest();
         }
